@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="auto-git-tool",
-    version="1.3.0",
+    version="1.2.1",
     packages=find_packages(),
     install_requires=[
         'jst-aicommit',
