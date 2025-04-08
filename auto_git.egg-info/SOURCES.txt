@@ -1,0 +1,10 @@
+README.md
+setup.py
+auto_git/__init__.py
+auto_git/cli.py
+auto_git.egg-info/PKG-INFO
+auto_git.egg-info/SOURCES.txt
+auto_git.egg-info/dependency_links.txt
+auto_git.egg-info/entry_points.txt
+auto_git.egg-info/requires.txt
+auto_git.egg-info/top_level.txt
