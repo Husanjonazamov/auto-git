@@ -5,10 +5,7 @@ def run_git_command(command):
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
 
-    if process.returncode != 0:
-        print(f"Xatolik: {stderr.decode('utf-8')}")
-    else:
-        print(stdout.decode('utf-8'))
+    print(stdout.decode('utf-8'))
 
 def aic():
     """Git add, commit va pushni bajarish"""
