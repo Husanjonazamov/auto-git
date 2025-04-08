@@ -23,15 +23,12 @@ def run_git_command(command, description=None, style="white", print_output=True)
 
 def aic():
     """Auto Git: add → AI commit → push"""
-    # 1. Git add
     run_git_command("git add .", "Fayllar qo‘shildi (staged)", "green")
 
-    # 2. Faqat fayl ro'yxati (name-status)
     run_git_command("git diff --cached --name-status", "O'zgargan fayllar", "yellow")
 
-    # 3. AI commit xabari olish
     aic_commit = run_git_command("aic", "AI asosidagi commit xabari", "cyan")
-    aic_commit = aic_commit.strip("`'\" ").splitlines()[0]  # 1-qatorni olish
+    aic_commit = aic_commit.strip("`'\" ").splitlines()[0]  
 
     if not aic_commit:
         print(colored("❌ AI commit xabari olinmadi!", "red"))
