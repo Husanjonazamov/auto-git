@@ -1,5 +1,5 @@
 [project]
-name = "auto-git"
+name = "autogit"
 version = "0.1.0"
 description = "Git uchun avtomatlashtirilgan add, AI commit va push buyrug‘i"
 readme = "README.md"
