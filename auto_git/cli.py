@@ -24,13 +24,10 @@ def run_git_command(command, description=None, style="white", print_output=True)
 
 def aic():
     """Auto Git: add → AI commit → push"""
-    # 1. Git add
     run_git_command("git add .", "Fayllar qo‘shildi (staged)", "green")
 
-    # 2. Diff ko‘rsatish
     run_git_command("git diff --cached", "Commit qilinadigan o‘zgarishlar", "yellow")
 
-    # 3. AI commit xabari olish
     aic_commit = run_git_command("aic", "AI asosidagi commit xabari", "cyan")
 
     aic_commit = aic_commit.strip("`'\" ").splitlines()[0]  # faqat 1-qator
