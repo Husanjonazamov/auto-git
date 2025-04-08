@@ -15,3 +15,20 @@ pip install auto-git
 
 ```bash
 autogit
+
+```
+
+## Loyiha Structurasi
+
+``` bash
+
+auto-git/
+├── auto_git/
+│   └── cli.py
+├── tests/
+│   └── test_something.py
+├── README.md
+├── LICENSE
+├── pyproject.toml
+```
+
