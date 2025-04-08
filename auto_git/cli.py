@@ -12,29 +12,26 @@ def run_git_command(command):
 
 def aic():
     """Git add, commit va pushni bajarish"""
-    try:
-        # Git status (o'zgartirilgan fayllarni ko'rsatish)
-        print("\nO'zgartirilgan fayllar:")
-        run_git_command("git status")
-        
-        # Git add
-        run_git_command("git add .")
+    # Git status (o'zgartirilgan fayllarni ko'rsatish)
+    print("\nO'zgartirilgan fayllar:")
+    run_git_command("git status")
+    
+    # Git add
+    run_git_command("git add .")
 
-        # Git diff (o'zgartirishlarni ko'rsatish)
-        print("\nO'zgartirishlar:")
-        run_git_command("git diff")
+    # Git diff (o'zgartirishlarni ko'rsatish)
+    print("\nO'zgartirishlar:")
+    run_git_command("git diff")
 
-        aic_commit = run_git_command('aic')
+    aic_commit = run_git_command('aic')
 
-        # Git commit
-        run_git_command(f'git commit -m "{aic_commit}"')
+    # Git commit
+    run_git_command(f'git commit -m "{aic_commit}"')
 
-        # Git push (sana uchun branchni avtomatik aniqlash)
-        branch_name = subprocess.check_output("git branch --show-current", shell=True).decode().strip()
-        run_git_command(f"git push origin {branch_name}")
+    # Git push (sana uchun branchni avtomatik aniqlash)
+    branch_name = subprocess.check_output("git branch --show-current", shell=True).decode().strip()
+    run_git_command(f"git push origin {branch_name}")
 
-    except Exception as e:
-        print(f"Xatolik: {e}")
 
 if __name__ == "__main__":
     aic()
