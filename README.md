@@ -7,7 +7,7 @@ AI yordamida Git jarayonlarini avtomatlashtirish: `git add`, `commit` (AI yozadi
 ## 📦 O‘rnatish
 
 ```bash
-pip install auto-git
+pip install auto-git-tool
 
 ```
 
