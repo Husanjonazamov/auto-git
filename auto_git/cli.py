@@ -1,48 +1,46 @@
 import subprocess
-from rich.console import Console
-from rich.text import Text
+from termcolor import colored
 
-console = Console()
 
-def run_git_command(command, description=None, style="white"):
-    """Git buyruqlarini bajarish va natijani chiqarish"""
+def run_git_command(command, description=None, style="white", print_output=True):
+    """Git komandalarni bajarish va natijasini qaytarish"""
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
 
-    output = stdout.decode('utf-8').strip()
-    error = stderr.decode('utf-8').strip()
-
     if description:
-        console.rule(f"[bold {style}]{description}[/bold {style}]")
+        print(colored(f"\n{' ' + description + ' ':─^100}", style))
 
-    if output:
-        console.print(Text(output, style=style))
-    if error:
-        console.print(Text(error, style="bold red"))
+    output = stdout.decode("utf-8").strip()
+    error = stderr.decode("utf-8").strip()
+
+    if print_output:
+        if output:
+            print(colored(output, style))
+        if error:
+            print(colored(error, "red"))
 
     return output
 
 
 def aic():
-    """Git add, aic commit va push jarayonlarini avtomatlashtiradi"""
-    
+    """Auto Git: add → AI commit → push"""
+    # 1. Git add
     run_git_command("git add .", "Fayllar qo‘shildi (staged)", "green")
 
+    # 2. Diff ko‘rsatish
     run_git_command("git diff --cached", "Commit qilinadigan o‘zgarishlar", "yellow")
 
-    run_git_command("git status", "Git holati", "cyan")
+    # 3. AI commit xabari olish
+    aic_commit = run_git_command("aic", "AI asosidagi commit xabari", "cyan")
 
-    aic_commit = run_git_command("aic", "AI asosidagi commit xabari", "bright_yellow")
+    aic_commit = aic_commit.strip("`'\" ").splitlines()[0]  # faqat 1-qator
 
-    # Git commit
-    run_git_command(f'git commit -m "{aic_commit}"', "Commit bajarildi", "bright_yellow")
+    if not aic_commit:
+        print(colored("❌ AI commit xabari olinmadi!", "red"))
+        return
 
-    # Branch nomini olish
-    branch_name = subprocess.check_output("git branch --show-current", shell=True).decode().strip()
+    run_git_command(f'git commit -m "{aic_commit}"', "Commit bajarildi", "magenta")
 
-    # Git push
-    run_git_command(f"git push origin {branch_name}", f"{branch_name} branchiga push qilinmoqda", "blue")
+    run_git_command("git push origin main", "main branchiga push qilinmoqda", "blue")
 
-
-if __name__ == "__main__":
-    aic()
+    print(colored("\n✅ Hammasi muvaffaqiyatli yakunlandi!", "green"))
