@@ -26,14 +26,13 @@ def run_git_command(command, description=None, style="white"):
 def aic():
     """Git add, aic commit va push jarayonlarini avtomatlashtiradi"""
     
-    # Git status
-    run_git_command("git status", "Git holati", "cyan")
-
-    # Git add
     run_git_command("git add .", "Fayllar qo‘shildi (staged)", "green")
 
-    # Git diff
+    # Endi git status (faqat staging uchun)
     run_git_command("git diff --cached", "Commit qilinadigan o‘zgarishlar", "yellow")
+
+    # So‘ng git status (agar xohlasangiz)
+    run_git_command("git status", "Git holati", "cyan")
 
     # AIC orqali commit xabarini olish
     aic_commit = run_git_command("aic", "AI asosidagi commit xabari", "bright_yellow")
