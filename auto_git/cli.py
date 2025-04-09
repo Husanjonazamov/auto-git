@@ -39,8 +39,7 @@ def ensure_main_branch():
     current_branch = run_git_command("git branch --show-current", print_output=False)
 
     if not current_branch:
-        run_git_command("git checkout -M main", "main branch yaratildi", "blue")
-        run_git_command("git checkout -b main")
+        run_git_command("git checkout -b main", "main branch yaratildi", "blue")
 
 
 def aic():
