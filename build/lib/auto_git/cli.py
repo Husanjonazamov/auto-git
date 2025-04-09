@@ -41,8 +41,14 @@ def ensure_main_branch():
     if not current_branch:
         run_git_command("git checkout -b main", "main branch yaratildi", "blue")
 
+
 def aic():
     """Auto Git: add → AI commit → push"""
+    
+    
+    ensure_git_repository()
+    ensure_main_branch()
+    
     run_git_command("git add .", "Fayllar qo‘shildi (staged)", "green")
 
     run_git_command("git diff --cached --name-status", "O'zgargan fayllar", "yellow")
