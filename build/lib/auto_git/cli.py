@@ -1,5 +1,6 @@
 import subprocess
 from termcolor import colored
+import os
 
 def run_git_command(command, description=None, style="white", print_output=True):
     """Git komandalarni bajarish va natijasini qaytarish"""
@@ -20,6 +21,25 @@ def run_git_command(command, description=None, style="white", print_output=True)
 
     return output
 
+
+def ensure_git_repository():
+    """Git repozitoriy mavjudligini tekshiradi, yo'q bo‘lsa yaratadi"""
+    if not os.path.exists(".git"):
+        print(colored("⚠️ Siz hali Git repozitoriyga ulanmagansiz!", "red"))
+        run_git_command("git init", "Yangi Git repozitoriy yaratildi", "cyan")
+        remote = input(colored("🔗 Ulanadigan Git remote URL ni kiriting: ", "yellow")).strip()
+        if remote:
+            run_git_command(f"git remote add origin {remote}", "Remote URL qo‘shildi", "green")
+        else:
+            print(colored("❌ Remote URL ko‘rsatilmagan, push bosqichi bajarilmaydi!", "red"))
+
+
+def ensure_main_branch():
+    """Agar hech qanday branch bo'lmasa, 'main' branchni yaratadi"""
+    current_branch = run_git_command("git branch --show-current", print_output=False)
+
+    if not current_branch:
+        run_git_command("git checkout -b main", "main branch yaratildi", "blue")
 
 def aic():
     """Auto Git: add → AI commit → push"""
